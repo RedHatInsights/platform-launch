@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.org/RedHatInsights/insights-frontend-starter-app.svg?branch=master)](https://travis-ci.org/RedHatInsights/insights-frontend-starter-app)
-
 # {{cookiecutter.github_repository_name}}
 
 {{cookiecutter.github_repository_description}}
@@ -165,6 +163,7 @@ Redux actions should only have two properties, type and payload, as a best pract
       - look at [/src/api/System/getSystems.js](https://github.com/RedHatInsights/turbo-octo-couscous/tree/master/src/api/System/getSystems.js)
   - [redux-thunk](https://github.com/gaearon/redux-thunk)
     - A function that wraps an expression to delay its evaluation
+
     ```Javascript
     // gotSystems(Error) are action creators
     function getSystems() {
@@ -176,6 +175,7 @@ Redux actions should only have two properties, type and payload, as a best pract
           };
         }
     ```
+
   - [redux-saga](https://github.com/yelouafi/redux-saga/)
     - Uses [generator functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function*)
     - Could be a lot to learn initially.
@@ -209,6 +209,7 @@ When setting up the routes, the page content is wrapped with a `.page__{pageName
   - passes updated match, location, and history props to the wrapped component whenever it renders
 
 ## Running locally
+
 Have [insights-proxy](https://github.com/RedHatInsights/insights-proxy) installed under PROXY_PATH
 
 ```shell
