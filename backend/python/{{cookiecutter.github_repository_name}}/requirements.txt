@@ -1,0 +1,5 @@
+boto3
+watchtower
+logstash-formatter
+prometheus-client
+kafka-python
