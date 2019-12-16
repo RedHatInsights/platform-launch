@@ -1,0 +1,11 @@
+{
+    "github_organization_name": "redhatinsights",
+    "github_repository_name": "insights-backend-python-app",
+    "github_repository_description": "description for your app",
+    "your_name": "Richard Hendriks",
+    "your_email": "richard.hendriks@piedpiper.com",
+    "github_username": "The owner of the repository. Either your github username or organization name.",
+    "insights_platform_app_name": "my-app-name",
+    "insights_platform_consume_topic": "platform.consume.topic",
+    "insights_platform_produce_topic": "platform.produce.topic"
+}
