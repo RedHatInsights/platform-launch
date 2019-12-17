@@ -1,6 +1,6 @@
 /*global module*/
 
-const SECTION = '{{cookiecutter.insights_platform_bundle}}';
+const SECTION = '{{cookiecutter.insights_platform_app_bundle}}';
 const APP_ID = '{{cookiecutter.insights_platform_app_name}}';
 const FRONTEND_PORT = 8002;
 const routes = {};

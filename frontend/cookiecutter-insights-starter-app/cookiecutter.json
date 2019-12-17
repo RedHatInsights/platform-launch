@@ -4,10 +4,11 @@
     "github_repository_description": "description for your app",
     "your_name": "Richard Hendriks",
     "your_email": "richard.hendriks@piedpiper.com",
-    "github_username": "The owner of the repository. Either your github username or organization name.",
-    "insights_platform_app_name": "Your insights platform application id. ex) insights-example",
-    "insights_platform_app_display_name": "The display name for your application. ex) Insights Example",
-    "insights_platform_bundle": "The bundle your app will be a part of. ex) cloud.redhat.com/bundle/app_id",
-    "insights_platform_api_version": "1",
-    "insights_platform_isBeta": ["n", "y"]
+    "github_username": "Repository Owner",
+    "insights_platform_app_name": "pied-piper",
+    "insights_platform_app_display_name": "Pied Piper",
+    "insights_platform_app_pathname": "the url for your app ex) pied-piper",
+    "insights_platform_app_bundle": "what bundle your app is in ex) cloud.redhat.com/{bundle}/{{ cookiecutter.insights_platform_app_name }}",
+    "insights_platform_api_version": ["1", "2", "3", "4", "5", "none"],
+    "slack_channel": "#PiedPiperTalk"
 }
