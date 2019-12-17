@@ -7,6 +7,7 @@
     "github_username": "Repository Owner",
     "insights_platform_app_name": "pied-piper",
     "insights_platform_app_display_name": "Pied Piper",
+    "insights_platform_app_description": "Middle out",
     "insights_platform_app_pathname": "the url for your app ex) pied-piper",
     "insights_platform_app_bundle": "what bundle your app is in ex) cloud.redhat.com/{bundle}/{{ cookiecutter.insights_platform_app_name }}",
     "insights_platform_api_version": ["1", "2", "3", "4", "5", "none"],

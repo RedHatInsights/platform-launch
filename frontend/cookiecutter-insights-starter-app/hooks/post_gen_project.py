@@ -12,6 +12,7 @@ d = {
             'isBeta': [ 'Yes' ]
         },
         'channel': '{{ cookiecutter.slack_channel }}',
+        'description': '{{ cookiecutter.insights_platform_app_description }}',
         'git_repo': githubURL,
         'deployment-repo': githubDeploymentRepo,
         'frontend': {
@@ -22,4 +23,4 @@ d = {
 }
 
 with open('cloudservicesconfig.yml', 'w') as outfile:
-    outfile.write(yaml.dump(d, default_flow_style=False, allow_unicode=True))
+    outfile.write(yaml.dump(d, default_flow_style=False, allow_unicode=True, sort_keys=False))
