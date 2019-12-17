@@ -28,4 +28,4 @@ to it that way.
     virtualenv .
     source bin/activate
     pip install -r requirements.txt
-    python app.py
+    BOOTSTRAP_SERVERS=localhost:29092 python app.py
