@@ -1,7 +1,7 @@
 import os
 import logging
 
-APP_NAME = os.getenv("APP_NAME", "{{cookiecutter.insights_platform_app_name}}")
+APP_NAME = os.getenv("APP_NAME", "{{cookiecutter.insights_platform_app_name|lower|replace('-', '_')}}")
 LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO").upper()
 
 logger = logging.getLogger(APP_NAME)
