@@ -1,0 +1,144 @@
+# Modified from https://raw.githubusercontent.com/RedHatInsights/insights-upload/master/osd_assets/build_complete.yml
+apiVersion: v1
+kind: Template
+metadata:
+  name: {{cookiecutter.insights_platform_app_name|lower}}
+
+parameters:
+# parameters to be controlled by e2e-deploy must be defined here with a default
+# value. The default value should be what will be used in the QE test env
+- name: NAMESPACE
+  description: Name of your project (e.g. myproject)
+- name: IMAGE_NAMESPACE
+  description: Name of the namespace app images are pulled from (if not buildfactory)
+  value: buildfactory
+- name: IMAGE_TAG
+  description: Tag of the app image to use (default is latest)
+  value: latest
+- name: KAFKA_BOOTSTRAP_HOST
+  value: mq-kafka
+- name: KAFKA_BOOTSTRAP_PORT
+  value: "29092"
+- name: CPU_LIMIT
+  description: Cpu limit of service
+  value: "500m"
+- name: MEMORY_LIMIT
+  description: memory limit of service
+  value: "512Mi"
+
+objects:
+- apiVersion: apps.openshift.io/v1
+  kind: DeploymentConfig
+  metadata:
+    annotations:
+      openshift.io/generated-by: OpenShiftWebConsole
+    labels:
+      app: {{cookiecutter.insights_platform_app_name|lower}}
+    name: {{cookiecutter.insights_platform_app_name|lower}}
+  spec:
+    replicas: 1
+    selector:
+      deploymentconfig: {{cookiecutter.insights_platform_app_name|lower}}
+    strategy:
+      activeDeadlineSeconds: 21600
+      recreateParams:
+        timeoutSeconds: 600
+      resources: {}
+      rollingParams:
+        intervalSeconds: 1
+        maxSurge: 25%
+        maxUnavailable: 25%
+        timeoutSeconds: 600
+        updatePeriodSeconds: 1
+      type: Rolling
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app: {{cookiecutter.insights_platform_app_name|lower}}
+          deploymentconfig: {{cookiecutter.insights_platform_app_name|lower}}
+      spec:
+        containers:
+        - env:
+          # Environent variables for your app should be added here
+          # The below env vars are provided as examples
+          - name: LOG_LEVEL
+            value: ${LOG_LEVEL}
+          - name: PORT
+            value: "8080"
+          - name: AWS_ACCESS_KEY_ID
+            valueFrom:
+              secretKeyRef:
+                key: aws_access_key_id
+                name: upload-s3
+          - name: AWS_SECRET_ACCESS_KEY
+            valueFrom:
+              secretKeyRef:
+                key: aws_secret_access_key
+                name: upload-s3
+          - name: AWS_SECRET_ACCESS_KEY
+            valueFrom:
+              secretKeyRef:
+                key: CW_AWS_SECRET_ACCESS_KEY
+                name: cloudwatch
+          - name: CW_AWS_ACCESS_KEY_ID
+            valueFrom:
+              secretKeyRef:
+                key: CW_AWS_ACCESS_KEY_ID
+                name: cloudwatch
+          - name: AWS_REGION
+            value: ${AWS_REGION}
+          image: ${IMAGE_NAMESPACE}/{{cookiecutter.openshift_image_stream_name|lower}}:${IMAGE_TAG}
+          imagePullPolicy: Always
+          name: {{cookiecutter.insights_platform_app_name|lower}}
+          ports:
+          # Any ports should be defined here. These are provided as examples.
+          - containerPort: 8080
+            protocol: TCP
+          resources:
+            limits:
+              cpu: ${CPU_LIMIT}
+              memory: ${MEMORY_LIMIT}
+            requests:
+              cpu: 250m
+              memory: 64Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 60
+    test: false
+    triggers:
+    - imageChangeParams:
+        automatic: true
+        containerNames:
+        - {{cookiecutter.insights_platform_app_name|lower}}
+        from:
+          kind: ImageStreamTag
+          name: {{cookiecutter.openshift_image_stream_name|lower}}:${IMAGE_TAG}
+          namespace: ${IMAGE_NAMESPACE}
+      type: ImageChange
+    - type: ConfigChange
+
+# Service is provided if you require cluster or external resources to reach your
+# app via the network. If unneeded, safely delete the lines below
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      openshift.io/generated-by: OpenShiftWebConsole
+    labels:
+      app: {{cookiecutter.insights_platform_app_name|lower}}
+    name: {{cookiecutter.insights_platform_app_name|lower}}
+  spec:
+    ports:
+    - name: {{cookiecutter.openshift_expose_port}}-tcp
+      port: {{cookiecutter.openshift_expose_port}}
+      protocol: TCP
+      targetPort: {{cookiecutter.openshift_expose_port}}
+    selector:
+      deploymentconfig: {{cookiecutter.insights_platform_app_name|lower}}
+    sessionAffinity: None
+    type: ClusterIP

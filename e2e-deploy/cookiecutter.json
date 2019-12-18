@@ -1,0 +1,13 @@
+{
+    "github_organization_name": "redhatinsights",
+    "github_repository_name": "insights-frontend-starter-app",
+    "github_repository_description": "description for your app",
+    "your_name": "Richard Hendriks",
+    "your_email": "richard.hendriks@piedpiper.com",
+    "github_username": "The owner of the repository. Either your github username or organization name.",
+    "insights_platform_app_name": "Your insights platform application name",
+    "insights_platform_bundle": "The bundle your app will be a part of. ex) cloud.redhat.com/bundle/app_name",
+    "e2e_project_name": "example: platform, advisor, vulnerability, new-project, etc.",
+    "openshift_image_stream_name": "imagestream",
+    "openshift_expose_port": "port for app to listen on"
+}
