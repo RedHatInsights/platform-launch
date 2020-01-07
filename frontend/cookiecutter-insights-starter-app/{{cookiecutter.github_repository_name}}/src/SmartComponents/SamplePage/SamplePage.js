@@ -24,7 +24,7 @@ class SamplePage extends Component {
         return (
             <React.Fragment>
                 <PageHeader>
-                    <PageHeaderTitle title='Sample Insights App'/>
+                    <PageHeaderTitle title='{{ cookiecutter.insights_platform_app_display_name }}'/>
                     <p> This is page header text </p>
                 </PageHeader>
                 <Main>
